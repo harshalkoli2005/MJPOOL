@@ -3,191 +3,796 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MJ Pool Services | Admin Login</title>
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<!-- Font Awesome -->
+<link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    rel="stylesheet"
+>
+
+<!-- Google Font -->
+<link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+>
 
 <style>
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+body {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    /* YOUR BACKGROUND IMAGE */
     background:
-    linear-gradient(rgba(0,53,102,.75),rgba(0,53,102,.75)),
-    url("{{ url_for('static', filename='img/BG.png') }}");
-    background-size:cover;
-    background-position:center;
+        linear-gradient(
+            rgba(0, 53, 102, 0.72),
+            rgba(0, 53, 102, 0.72)
+        ),
+        url("{{ url_for('static', filename='img/BG.png') }}");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
-.login-box{
-    width:420px;
-    background:#fff;
-    padding:40px;
-    border-radius:22px;
-    box-shadow:0 20px 40px rgba(0,0,0,.25);
+
+/* MAIN LOGIN CONTAINER */
+
+.login-wrapper {
+    width: 100%;
+    max-width: 950px;
+    min-height: 560px;
+
+    display: flex;
+
+    background: #fff;
+
+    border-radius: 24px;
+    overflow: hidden;
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.28);
 }
 
-.logo{
-    text-align:center;
-    margin-bottom:25px;
+
+/* =================================
+   LEFT INFORMATION PANEL
+================================= */
+
+.login-info {
+
+    width: 48%;
+
+    padding: 55px 45px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    color: #fff;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(0, 119, 255, 0.95),
+            rgba(0, 73, 173, 0.95)
+        );
 }
 
-.logo i{
-    font-size:42px;
-    color:#0077ff;
-    margin-bottom:10px;
+
+/* Decorative circles */
+
+.login-info::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 300px;
+    height: 300px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.08);
+
+    top: -120px;
+    right: -110px;
 }
 
-.logo h2{
-    color:#003566;
-    font-size:30px;
-    font-weight:700;
+.login-info::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 230px;
+    height: 230px;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.06);
+
+    bottom: -100px;
+    left: -80px;
 }
 
-.logo p{
-    color:#666;
-    font-size:15px;
+
+/* Icon */
+
+.brand-icon {
+
+    width: 68px;
+    height: 68px;
+
+    border-radius: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255,255,255,0.16);
+
+    font-size: 29px;
+
+    margin-bottom: 25px;
+
+    position: relative;
+    z-index: 2;
 }
 
-.input-box{
-    margin-bottom:18px;
+
+/* Heading */
+
+.login-info h1 {
+
+    font-size: 34px;
+
+    font-weight: 700;
+
+    margin-bottom: 14px;
+
+    position: relative;
+    z-index: 2;
 }
 
-.input-box label{
-    display:block;
-    margin-bottom:8px;
-    color:#003566;
-    font-weight:600;
+
+/* Paragraph */
+
+.login-info p {
+
+    max-width: 370px;
+
+    font-size: 14px;
+
+    line-height: 1.8;
+
+    opacity: 0.92;
+
+    position: relative;
+    z-index: 2;
 }
 
-.input-box .field{
-    position:relative;
+
+/* Features */
+
+.feature-list {
+
+    margin-top: 30px;
+
+    position: relative;
+    z-index: 2;
 }
 
-.input-box i{
-    position:absolute;
-    left:16px;
-    top:50%;
-    transform:translateY(-50%);
-    color:#0077ff;
+.feature {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin-bottom: 15px;
+
+    font-size: 14px;
 }
 
-.input-box input{
-    width:100%;
-    padding:14px 16px 14px 45px;
-    border:1px solid #d8e2ee;
-    border-radius:12px;
-    font-size:15px;
-    outline:none;
-    transition:.3s;
+.feature i {
+
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.16);
+
+    font-size: 12px;
 }
 
-.input-box input:focus{
-    border-color:#0077ff;
-    box-shadow:0 0 0 3px rgba(0,119,255,.15);
+
+/* =================================
+   RIGHT LOGIN FORM
+================================= */
+
+.login-form-section {
+
+    width: 52%;
+
+    padding: 55px 60px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background: #fff;
 }
 
-.login-btn{
-    width:100%;
-    padding:14px;
-    border:none;
-    border-radius:12px;
-    background:#0077ff;
-    color:#fff;
-    font-size:16px;
-    font-weight:600;
-    cursor:pointer;
-    transition:.3s;
+
+/* Heading */
+
+.login-heading {
+
+    margin-bottom: 30px;
 }
 
-.login-btn:hover{
-    background:#005fd1;
+.login-heading h2 {
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    color: #1f2937;
+
+    margin-bottom: 8px;
 }
 
-.back-home{
-    text-align:center;
-    margin-top:18px;
+.login-heading p {
+
+    margin: 0;
+
+    color: #6b7280;
+
+    font-size: 14px;
 }
 
-.back-home a{
-    color:#0077ff;
-    text-decoration:none;
-    font-weight:500;
+
+/* =================================
+   FLASH MESSAGE
+================================= */
+
+.alert {
+
+    padding: 12px 15px;
+
+    margin-bottom: 20px;
+
+    border-radius: 10px;
+
+    background: #fff0f0;
+
+    color: #c62828;
+
+    border: 1px solid #ffd2d2;
+
+    text-align: center;
+
+    font-size: 13px;
 }
 
-.alert{
-    background:#ffe5e5;
-    color:#c62828;
-    padding:12px;
-    border-radius:10px;
-    margin-bottom:18px;
-    text-align:center;
+
+/* =================================
+   INPUT
+================================= */
+
+.input-box {
+
+    margin-bottom: 20px;
+}
+
+.input-box label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #374151;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.field {
+
+    position: relative;
+}
+
+.field i {
+
+    position: absolute;
+
+    left: 16px;
+
+    top: 50%;
+
+    transform: translateY(-50%);
+
+    color: #0077ff;
+
+    z-index: 2;
+}
+
+.field input {
+
+    width: 100%;
+
+    height: 50px;
+
+    padding: 0 16px 0 46px;
+
+    border: 1px solid #dbe3ec;
+
+    border-radius: 10px;
+
+    outline: none;
+
+    font-size: 14px;
+
+    color: #1f2937;
+
+    transition: 0.3s;
+
+    background: #fff;
+}
+
+.field input:focus {
+
+    border-color: #0077ff;
+
+    box-shadow:
+        0 0 0 3px rgba(0,119,255,0.08);
+}
+
+.field input::placeholder {
+
+    color: #9ca3af;
+}
+
+
+/* =================================
+   LOGIN BUTTON
+================================= */
+
+.login-btn {
+
+    width: 100%;
+
+    height: 50px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0077ff,
+            #005fd1
+        );
+
+    color: #fff;
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+}
+
+.login-btn:hover {
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(0,119,255,0.25);
+}
+
+
+/* =================================
+   SECURITY NOTE
+================================= */
+
+.security-note {
+
+    margin-top: 24px;
+
+    padding: 12px 14px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    background: #f0f8ff;
+
+    border-radius: 10px;
+
+    color: #587086;
+
+    font-size: 12px;
+}
+
+.security-note i {
+
+    color: #0077ff;
+}
+
+
+/* =================================
+   BACK TO HOME
+================================= */
+
+.back-home {
+
+    margin-top: 18px;
+
+    text-align: center;
+}
+
+.back-home a {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 8px;
+
+    width: 100%;
+
+    height: 48px;
+
+    border: 1px solid #dbe3ec;
+
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: #374151;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    transition: 0.3s;
+}
+
+.back-home a:hover {
+
+    background: #f4f8ff;
+
+    border-color: #0077ff;
+
+    color: #0077ff;
+}
+
+
+/* =================================
+   MOBILE RESPONSIVE
+================================= */
+
+@media (max-width: 768px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .login-wrapper {
+
+        flex-direction: column;
+
+        min-height: auto;
+
+        max-width: 500px;
+    }
+
+    .login-info {
+
+        width: 100%;
+
+        padding: 35px 30px;
+    }
+
+    .login-info h1 {
+
+        font-size: 27px;
+    }
+
+    .feature-list {
+
+        margin-top: 20px;
+    }
+
+    .login-form-section {
+
+        width: 100%;
+
+        padding: 35px 30px;
+    }
+}
+
+
+@media (max-width: 450px) {
+
+    .login-info {
+
+        padding: 30px 22px;
+    }
+
+    .login-form-section {
+
+        padding: 30px 22px;
+    }
+
+    .login-info h1 {
+
+        font-size: 24px;
+    }
+
+    .login-heading h2 {
+
+        font-size: 24px;
+    }
 }
 
 </style>
 </head>
 
+
 <body>
 
-<div class="login-box">
 
-    <div class="logo">
-        <i class="fa-solid fa-water-ladder"></i>
-        <h2>MJ Pool</h2>
-        <p>Admin Panel Login</p>
+<div class="login-wrapper">
+
+
+    <!-- =================================
+         LEFT SIDE
+    ================================= -->
+
+    <div class="login-info">
+
+        <div class="brand-icon">
+            <i class="fa-solid fa-water-ladder"></i>
+        </div>
+
+        <h1>MJ Pool Services</h1>
+
+        <p>
+            Welcome to the administrator portal.
+            Login securely to manage bookings, employees,
+            services and pool maintenance operations.
+        </p>
+
+
+        <div class="feature-list">
+
+            <div class="feature">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <span>
+                    Manage customer bookings
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <i class="fa-solid fa-users-gear"></i>
+
+                <span>
+                    Manage employees and services
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <i class="fa-solid fa-chart-line"></i>
+
+                <span>
+                    Monitor business activities
+                </span>
+
+            </div>
+
+
+            <div class="feature">
+
+                <i class="fa-solid fa-shield-halved"></i>
+
+                <span>
+                    Secure administrator access
+                </span>
+
+            </div>
+
+        </div>
+
     </div>
 
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <div class="alert">
-                {{ messages[0] }}
-            </div>
-        {% endif %}
-    {% endwith %}
 
-    <form method="POST">
 
-        <div class="input-box">
-            <label>Username</label>
-            <div class="field">
-                <i class="fa-solid fa-user"></i>
-                <input type="text" name="username" placeholder="Enter Username" required>
-            </div>
+    <!-- =================================
+         RIGHT SIDE LOGIN
+    ================================= -->
+
+    <div class="login-form-section">
+
+
+        <div class="login-heading">
+
+            <h2>Admin Login</h2>
+
+            <p>
+                Enter your administrator credentials to continue.
+            </p>
+
         </div>
 
-        <div class="input-box">
-            <label>Password</label>
-            <div class="field">
-                <i class="fa-solid fa-lock"></i>
-                <input type="password" name="password" placeholder="Enter Password" required>
+
+        <!-- FLASH MESSAGE -->
+
+        {% with messages = get_flashed_messages() %}
+
+            {% if messages %}
+
+                <div class="alert">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    &nbsp;
+
+                    {{ messages[0] }}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+
+        <!-- LOGIN FORM -->
+
+        <form method="POST">
+
+
+            <div class="input-box">
+
+                <label>
+                    Username
+                </label>
+
+                <div class="field">
+
+                    <i class="fa-solid fa-user"></i>
+
+                    <input
+                        type="text"
+                        name="username"
+                        placeholder="Enter Username"
+                        autocomplete="username"
+                        required
+                    >
+
+                </div>
+
             </div>
+
+
+
+            <div class="input-box">
+
+                <label>
+                    Password
+                </label>
+
+                <div class="field">
+
+                    <i class="fa-solid fa-lock"></i>
+
+                    <input
+                        type="password"
+                        name="password"
+                        placeholder="Enter Password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+
+            <button
+                type="submit"
+                class="login-btn"
+            >
+
+                <i class="fa-solid fa-right-to-bracket"></i>
+
+                &nbsp;
+
+                Login to Admin Panel
+
+            </button>
+
+
+        </form>
+
+
+
+        <!-- SECURITY -->
+
+        <div class="security-note">
+
+            <i class="fa-solid fa-shield-halved"></i>
+
+            <span>
+                Your administrator credentials are protected
+                and used only for secure portal access.
+            </span>
+
         </div>
 
-        <button type="submit" class="login-btn">
-            <i class="fa-solid fa-right-to-bracket"></i>
-            Login
-        </button>
 
-    </form>
 
-    <div class="back-home">
-        <a href="/">
-            <i class="fa-solid fa-arrow-left"></i>
-            Back to Website
-        </a>
+        <!-- BACK TO HOME -->
+
+        <div class="back-home">
+
+            <a href="/">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                Back to Home
+
+            </a>
+
+        </div>
+
+
     </div>
 
 </div>
+
 
 </body>
 </html>

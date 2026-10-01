@@ -39,7 +39,7 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
 
 </nav>
 
-<<div class="header-btn">
+<div class="header-btn">
     <div class="login-dropdown">
 
         <button type="button" id="loginToggle" class="login-btn">
@@ -543,6 +543,39 @@ All Rights Reserved.
 </a>
 
 <!-- SCRIPT -->
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const loginToggle = document.getElementById("loginToggle");
+    const dropdownMenu = document.getElementById("dropdownMenu");
+
+    if (!loginToggle || !dropdownMenu) {
+        console.log("Login dropdown elements not found");
+        return;
+    }
+
+    loginToggle.addEventListener("click", function (event) {
+        event.preventDefault();
+        event.stopPropagation();
+        dropdownMenu.classList.toggle("show");
+    });
+
+    document.addEventListener("click", function (event) {
+        if (
+            !dropdownMenu.contains(event.target) &&
+            !loginToggle.contains(event.target)
+        ) {
+            dropdownMenu.classList.remove("show");
+        }
+    });
+
+});
+</script>
+
+</body>
 
 <script src="{{ url_for('static', filename='main.js') }}"></script>
 

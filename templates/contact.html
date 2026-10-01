@@ -1,85 +1,559 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Contact MJ Pool</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Contact MJ Pool Services</title>
+
+
+<!-- Bootstrap -->
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+
+<!-- Font Awesome -->
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 
 <style>
+
+*{
+    box-sizing:border-box;
+}
+
 body{
-    background:#eef7ff;
+
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:"Segoe UI",Arial,sans-serif;
+
+    background:
+        linear-gradient(
+            rgba(0,53,102,.72),
+            rgba(0,53,102,.72)
+        ),
+        url("{{ url_for('static', filename='img/BG.png') }}");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px;
 }
+
+
+/* MAIN CARD */
+
 .contact-box{
-    max-width:750px;
-    margin:50px auto;
+
+    width:100%;
+
+    max-width:800px;
+
     background:#fff;
-    padding:35px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+    padding:40px;
+
+    border-radius:22px;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.20);
 }
+
+
+/* HEADER */
+
+.contact-header{
+
+    text-align:center;
+
+    margin-bottom:30px;
+}
+
+.contact-icon{
+
+    width:65px;
+
+    height:65px;
+
+    margin:0 auto 15px;
+
+    border-radius:18px;
+
+    background:#eaf4ff;
+
+    color:#0077ff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:27px;
+}
+
+.contact-header h2{
+
+    color:#003566;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+}
+
+.contact-header p{
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    margin:0;
+}
+
+
+/* LABEL */
+
+.form-label{
+
+    color:#374151;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin-bottom:8px;
+}
+
+
+/* INPUT */
+
+.input-group-text{
+
+    background:#f8fafc;
+
+    border:1px solid #dbe3ec;
+
+    color:#0077ff;
+
+    min-width:48px;
+
+    justify-content:center;
+}
+
+.form-control{
+
+    min-height:48px;
+
+    border:1px solid #dbe3ec;
+
+    font-size:14px;
+
+    box-shadow:none !important;
+
+    border-radius:10px;
+}
+
+.input-group .form-control{
+
+    border-radius:0 10px 10px 0;
+}
+
+.input-group-text{
+
+    border-radius:10px 0 0 10px;
+}
+
+.form-control:focus{
+
+    border-color:#0077ff;
+
+    box-shadow:
+        0 0 0 3px rgba(0,119,255,.08) !important;
+}
+
+textarea.form-control{
+
+    min-height:120px;
+
+    resize:vertical;
+}
+
+
+/* SEND BUTTON */
+
+.send-btn{
+
+    width:100%;
+
+    height:50px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0077ff,
+            #005fd1
+        );
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.send-btn:hover{
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(0,119,255,.25);
+}
+
+
+/* SUCCESS MESSAGE */
+
+.alert{
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    margin-bottom:22px;
+}
+
+
+/* BACK HOME */
+
+.back-home{
+
+    text-align:center;
+
+    margin-top:20px;
+}
+
+.back-home a{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    color:#0077ff;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:500;
+}
+
+.back-home a:hover{
+
+    text-decoration:underline;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    body{
+
+        padding:15px;
+    }
+
+    .contact-box{
+
+        padding:28px 20px;
+    }
+
+    .contact-header h2{
+
+        font-size:24px;
+    }
+
+}
+
 </style>
 
 </head>
+
+
 <body>
 
-<div class="container">
 
 <div class="contact-box">
 
-<h2 class="text-primary mb-4 text-center">
-Contact Us
-</h2>
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for cat,msg in messages %}
-      {% if cat == "contact_success" %}
-        <div class="alert alert-success">{{ msg }}</div>
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-{% endwith %}
 
-<form method="POST">
+    <!-- HEADER -->
 
-<div class="row">
+    <div class="contact-header">
 
-<div class="col-md-6 mb-3">
-<label>Name</label>
-<input type="text" name="name" class="form-control" required>
+        <div class="contact-icon">
+
+            <i class="fa-solid fa-headset"></i>
+
+        </div>
+
+        <h2>
+            Contact Us
+        </h2>
+
+        <p>
+            Have a question? Send us a message and our team
+            will get back to you.
+        </p>
+
+    </div>
+
+
+    <!-- FLASH MESSAGE -->
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+        {% if messages %}
+
+            {% for cat,msg in messages %}
+
+                {% if cat == "contact_success" %}
+
+                    <div class="alert alert-success">
+
+                        <i class="fa-solid fa-circle-check me-2"></i>
+
+                        {{ msg }}
+
+                    </div>
+
+                {% endif %}
+
+            {% endfor %}
+
+        {% endif %}
+
+    {% endwith %}
+
+
+    <!-- CONTACT FORM -->
+
+    <form method="POST">
+
+
+        <div class="row">
+
+
+            <!-- NAME -->
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+                    Name
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </span>
+
+                    <input
+                        type="text"
+                        name="name"
+                        class="form-control"
+                        placeholder="Enter your name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- MOBILE -->
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+                    Mobile
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">
+
+                        <i class="fa-solid fa-phone"></i>
+
+                    </span>
+
+                    <input
+                        type="text"
+                        name="mobile"
+                        class="form-control"
+                        placeholder="Enter mobile number"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- EMAIL -->
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+                    Email
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">
+
+                        <i class="fa-solid fa-envelope"></i>
+
+                    </span>
+
+                    <input
+                        type="email"
+                        name="email"
+                        class="form-control"
+                        placeholder="Enter email address"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- SUBJECT -->
+
+            <div class="col-md-6 mb-3">
+
+                <label class="form-label">
+                    Subject
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text">
+
+                        <i class="fa-solid fa-tag"></i>
+
+                    </span>
+
+                    <input
+                        type="text"
+                        name="subject"
+                        class="form-control"
+                        placeholder="Enter subject"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- MESSAGE -->
+
+            <div class="col-md-12 mb-4">
+
+                <label class="form-label">
+                    Message
+                </label>
+
+                <div class="input-group">
+
+                    <span class="input-group-text align-items-start pt-3">
+
+                        <i class="fa-solid fa-message"></i>
+
+                    </span>
+
+                    <textarea
+                        name="message"
+                        rows="4"
+                        class="form-control"
+                        placeholder="Write your message..."
+                        required
+                    ></textarea>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- SEND -->
+
+        <button
+            type="submit"
+            class="send-btn"
+        >
+
+            <i class="fa-solid fa-paper-plane me-2"></i>
+
+            Send Message
+
+        </button>
+
+
+    </form>
+
+
+    <!-- BACK HOME -->
+
+    <div class="back-home">
+
+        <a href="/">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Back to Home
+
+        </a>
+
+    </div>
+
+
 </div>
 
-<div class="col-md-6 mb-3">
-<label>Mobile</label>
-<input type="text" name="mobile" class="form-control" required>
-</div>
-
-<div class="col-md-6 mb-3">
-<label>Email</label>
-<input type="email" name="email" class="form-control" required>
-</div>
-
-<div class="col-md-6 mb-3">
-<label>Subject</label>
-<input type="text" name="subject" class="form-control" required>
-</div>
-
-<div class="col-md-12 mb-4">
-<label>Message</label>
-<textarea name="message" rows="4" class="form-control" required></textarea>
-</div>
-
-</div>
-
-<button class="btn btn-primary w-100">
-Send Message
-</button>
-
-</form>
-
-</div>
-
-</div>
 
 </body>
+
 </html>

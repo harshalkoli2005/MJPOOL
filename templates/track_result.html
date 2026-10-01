@@ -1,110 +1,629 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Booking Status</title>
+<html lang="en">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Booking Status | MJ Pool Services</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
 
 <style>
+
+*{
+    box-sizing:border-box;
+}
+
 body{
-background:#eef7ff;
+
+    margin:0;
+
+    min-height:100vh;
+
+    font-family:"Segoe UI",Arial,sans-serif;
+
+    background:
+        linear-gradient(
+            rgba(0,53,102,.72),
+            rgba(0,53,102,.72)
+        ),
+        url("{{ url_for('static', filename='img/BG.png') }}");
+
+    background-size:cover;
+
+    background-position:center;
+
+    background-repeat:no-repeat;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:25px;
 }
-.card{
-max-width:700px;
-margin:40px auto;
-padding:30px;
-border-radius:18px;
-box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+
+/* MAIN CARD */
+
+.status-card{
+
+    width:100%;
+
+    max-width:750px;
+
+    background:#fff;
+
+    padding:38px;
+
+    border-radius:22px;
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.20);
 }
+
+
+/* HEADER */
+
+.status-header{
+
+    text-align:center;
+
+    margin-bottom:30px;
+}
+
+.status-icon{
+
+    width:65px;
+
+    height:65px;
+
+    margin:0 auto 15px;
+
+    border-radius:18px;
+
+    background:#eaf4ff;
+
+    color:#0077ff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:27px;
+}
+
+.status-header h2{
+
+    color:#003566;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+}
+
+.status-header p{
+
+    color:#6b7280;
+
+    font-size:14px;
+
+    margin:0;
+}
+
+
+/* BOOKING ID */
+
+.booking-id{
+
+    text-align:center;
+
+    margin-bottom:25px;
+}
+
+.booking-id span{
+
+    display:inline-block;
+
+    padding:9px 18px;
+
+    border-radius:50px;
+
+    background:#eaf7ff;
+
+    color:#0077ff;
+
+    font-size:16px;
+
+    font-weight:700;
+}
+
+
+/* TABLE */
+
+.table{
+
+    margin-bottom:25px;
+
+    border-radius:12px;
+
+    overflow:hidden;
+}
+
+.table th{
+
+    width:38%;
+
+    background:#f7faff;
+
+    color:#374151;
+
+    font-weight:600;
+
+    padding:14px 16px;
+
+    font-size:14px;
+}
+
+.table td{
+
+    padding:14px 16px;
+
+    color:#4b5563;
+
+    font-size:14px;
+
+    vertical-align:middle;
+}
+
+
+/* STATUS BADGES */
+
+.status-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:7px;
+
+    padding:7px 13px;
+
+    border-radius:50px;
+
+    font-size:13px;
+
+    font-weight:600;
+}
+
+.pending{
+
+    background:#fff3cd;
+
+    color:#856404;
+}
+
+.assigned{
+
+    background:#cff4fc;
+
+    color:#087990;
+}
+
+.completed{
+
+    background:#d1e7dd;
+
+    color:#146c43;
+}
+
+.cancelled{
+
+    background:#f8d7da;
+
+    color:#842029;
+}
+
+.pending-payment{
+
+    background:#fff3cd;
+
+    color:#856404;
+}
+
+
+/* BUTTONS */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:12px;
+}
+
+.action-btn{
+
+    flex:1;
+
+    height:48px;
+
+    border-radius:10px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    text-decoration:none;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.3s;
+}
+
+.track-btn{
+
+    background:
+        linear-gradient(
+            135deg,
+            #0077ff,
+            #005fd1
+        );
+
+    color:#fff;
+}
+
+.track-btn:hover{
+
+    color:#fff;
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 8px 20px rgba(0,119,255,.25);
+}
+
+.home-btn{
+
+    background:#f0f8ff;
+
+    color:#0077ff;
+
+    border:1px solid #d6eaff;
+}
+
+.home-btn:hover{
+
+    background:#0077ff;
+
+    color:#fff;
+
+    border-color:#0077ff;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    body{
+
+        padding:15px;
+    }
+
+    .status-card{
+
+        padding:25px 18px;
+    }
+
+    .status-header h2{
+
+        font-size:24px;
+    }
+
+    .table th{
+
+        width:42%;
+    }
+
+    .table th,
+    .table td{
+
+        padding:12px 10px;
+
+        font-size:13px;
+    }
+
+    .action-buttons{
+
+        flex-direction:column;
+    }
+
+}
+
 </style>
 
 </head>
+
+
 <body>
 
-<div class="card bg-white">
 
-<h2 class="text-primary mb-3">
-Booking Status
-</h2>
+<div class="status-card">
 
-<h4 class="text-success mb-4">
-{{ booking.booking_id }}
-</h4>
 
-<table class="table table-bordered">
+    <!-- HEADER -->
 
-<tr>
-<th>Customer</th>
-<td>{{ booking.customer_name }}</td>
-</tr>
+    <div class="status-header">
 
-<tr>
-<th>Mobile</th>
-<td>{{ booking.mobile }}</td>
-</tr>
+        <div class="status-icon">
 
-<tr>
-<th>Service</th>
-<td>{{ booking.service }}</td>
-</tr>
+            <i class="fa-solid fa-clipboard-check"></i>
 
-<tr>
-<th>Date</th>
-<td>{{ booking.preferred_date }}</td>
-</tr>
+        </div>
 
-<tr>
-<th>Time</th>
-<td>{{ booking.preferred_time }}</td>
-</tr>
+        <h2>Booking Status</h2>
 
-<tr>
-<th>Assigned Employee</th>
-<td>
-{{ booking.assigned_employee or "Not Assigned Yet" }}
-</td>
-</tr>
+        <p>
+            Here are the latest details of your service booking.
+        </p>
 
-<tr>
-<th>Status</th>
-<td>
+    </div>
 
-{% if booking.status=="Pending" %}
-<span class="badge bg-warning fs-6">
-Pending
-</span>
 
-{% elif booking.status=="Assigned" %}
-<span class="badge bg-info fs-6">
-Assigned
-</span>
+    <!-- BOOKING ID -->
 
-{% else %}
-<span class="badge bg-success fs-6">
-Completed
-</span>
+    <div class="booking-id">
 
-{% endif %}
+        <span>
 
-</td>
-</tr>
+            <i class="fa-solid fa-ticket me-2"></i>
 
-</table>
+            {{ booking.booking_id }}
 
-<div class="d-flex gap-2">
+        </span>
 
-<a href="/track" class="btn btn-primary">
-Track Another
-</a>
+    </div>
 
-<a href="/" class="btn btn-success">
-Home
-</a>
+
+    <!-- BOOKING DETAILS -->
+
+    <div class="table-responsive">
+
+        <table class="table table-bordered">
+
+            <tr>
+
+                <th>
+                    <i class="fa-solid fa-user me-2 text-primary"></i>
+                    Customer
+                </th>
+
+                <td>
+                    {{ booking.customer_name }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>
+                    <i class="fa-solid fa-phone me-2 text-primary"></i>
+                    Mobile
+                </th>
+
+                <td>
+                    {{ booking.mobile }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>
+                    <i class="fa-solid fa-screwdriver-wrench me-2 text-primary"></i>
+                    Service
+                </th>
+
+                <td>
+                    {{ booking.service }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>
+                    <i class="fa-solid fa-calendar-days me-2 text-primary"></i>
+                    Date
+                </th>
+
+                <td>
+                    {{ booking.preferred_date }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>
+                    <i class="fa-solid fa-clock me-2 text-primary"></i>
+                    Time
+                </th>
+
+                <td>
+                    {{ booking.preferred_time }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>
+                    <i class="fa-solid fa-user-tie me-2 text-primary"></i>
+                    Assigned Employee
+                </th>
+
+                <td>
+
+                    {% if booking.assigned_employee %}
+
+                        {{ booking.assigned_employee }}
+
+                    {% else %}
+
+                        <span class="text-muted">
+                            Not Assigned Yet
+                        </span>
+
+                    {% endif %}
+
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>
+                    <i class="fa-solid fa-circle-info me-2 text-primary"></i>
+                    Status
+                </th>
+
+                <td>
+
+
+                    {% if booking.status == "Pending Payment" %}
+
+                        <span class="status-badge pending-payment">
+
+                            <i class="fa-solid fa-credit-card"></i>
+
+                            Pending Payment
+
+                        </span>
+
+
+                    {% elif booking.status == "Pending" %}
+
+                        <span class="status-badge pending">
+
+                            <i class="fa-solid fa-hourglass-half"></i>
+
+                            Pending
+
+                        </span>
+
+
+                    {% elif booking.status == "Assigned" %}
+
+                        <span class="status-badge assigned">
+
+                            <i class="fa-solid fa-user-check"></i>
+
+                            Assigned
+
+                        </span>
+
+
+                    {% elif booking.status == "Completed" %}
+
+                        <span class="status-badge completed">
+
+                            <i class="fa-solid fa-circle-check"></i>
+
+                            Completed
+
+                        </span>
+
+
+                    {% elif booking.status == "Cancelled" %}
+
+                        <span class="status-badge cancelled">
+
+                            <i class="fa-solid fa-circle-xmark"></i>
+
+                            Cancelled
+
+                        </span>
+
+
+                    {% else %}
+
+                        <span class="status-badge pending">
+
+                            <i class="fa-solid fa-circle-info"></i>
+
+                            {{ booking.status }}
+
+                        </span>
+
+                    {% endif %}
+
+
+                </td>
+
+            </tr>
+
+        </table>
+
+    </div>
+
+
+    <!-- ACTION BUTTONS -->
+
+    <div class="action-buttons">
+
+
+        <a href="/track" class="action-btn track-btn">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            Track Another
+
+        </a>
+
+
+        <a href="/" class="action-btn home-btn">
+
+            <i class="fa-solid fa-house"></i>
+
+            Home
+
+        </a>
+
+
+    </div>
+
 
 </div>
 
-</div>
 
 </body>
+
 </html>
