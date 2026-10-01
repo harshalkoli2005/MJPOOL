@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MJ Pool Services | Admin Login</title>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:
+    linear-gradient(rgba(0,53,102,.75),rgba(0,53,102,.75)),
+    url("{{ url_for('static', filename='img/BG.png') }}");
+    background-size:cover;
+    background-position:center;
+}
+
+.login-box{
+    width:420px;
+    background:#fff;
+    padding:40px;
+    border-radius:22px;
+    box-shadow:0 20px 40px rgba(0,0,0,.25);
+}
+
+.logo{
+    text-align:center;
+    margin-bottom:25px;
+}
+
+.logo i{
+    font-size:42px;
+    color:#0077ff;
+    margin-bottom:10px;
+}
+
+.logo h2{
+    color:#003566;
+    font-size:30px;
+    font-weight:700;
+}
+
+.logo p{
+    color:#666;
+    font-size:15px;
+}
+
+.input-box{
+    margin-bottom:18px;
+}
+
+.input-box label{
+    display:block;
+    margin-bottom:8px;
+    color:#003566;
+    font-weight:600;
+}
+
+.input-box .field{
+    position:relative;
+}
+
+.input-box i{
+    position:absolute;
+    left:16px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#0077ff;
+}
+
+.input-box input{
+    width:100%;
+    padding:14px 16px 14px 45px;
+    border:1px solid #d8e2ee;
+    border-radius:12px;
+    font-size:15px;
+    outline:none;
+    transition:.3s;
+}
+
+.input-box input:focus{
+    border-color:#0077ff;
+    box-shadow:0 0 0 3px rgba(0,119,255,.15);
+}
+
+.login-btn{
+    width:100%;
+    padding:14px;
+    border:none;
+    border-radius:12px;
+    background:#0077ff;
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.login-btn:hover{
+    background:#005fd1;
+}
+
+.back-home{
+    text-align:center;
+    margin-top:18px;
+}
+
+.back-home a{
+    color:#0077ff;
+    text-decoration:none;
+    font-weight:500;
+}
+
+.alert{
+    background:#ffe5e5;
+    color:#c62828;
+    padding:12px;
+    border-radius:10px;
+    margin-bottom:18px;
+    text-align:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+    <div class="logo">
+        <i class="fa-solid fa-water-ladder"></i>
+        <h2>MJ Pool</h2>
+        <p>Admin Panel Login</p>
+    </div>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+
+        <div class="input-box">
+            <label>Username</label>
+            <div class="field">
+                <i class="fa-solid fa-user"></i>
+                <input type="text" name="username" placeholder="Enter Username" required>
+            </div>
+        </div>
+
+        <div class="input-box">
+            <label>Password</label>
+            <div class="field">
+                <i class="fa-solid fa-lock"></i>
+                <input type="password" name="password" placeholder="Enter Password" required>
+            </div>
+        </div>
+
+        <button type="submit" class="login-btn">
+            <i class="fa-solid fa-right-to-bracket"></i>
+            Login
+        </button>
+
+    </form>
+
+    <div class="back-home">
+        <a href="/">
+            <i class="fa-solid fa-arrow-left"></i>
+            Back to Website
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

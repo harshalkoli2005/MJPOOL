@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MJ Pool Services | Swimming Pool Maintenance</title>
+
+<link rel="stylesheet" href="main.css">
+
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="logo">
+<h2>MJ Pool Services</h2>
+</div>
+
+<nav class="navbar" id="navbar">
+
+<a href="#home">Home</a>
+<a href="#services">Services</a>
+<a href="#about">About</a>
+<a href="#pool-care">Pool Care Tips</a>
+<a href="#gallery">Gallery</a>
+<a href="#contact">Contact</a>
+ 
+
+</nav>
+
+<<div class="header-btn">
+    <div class="login-dropdown">
+
+        <button type="button" id="loginToggle" class="login-btn">
+            <i class="fa-solid fa-lock"></i>
+            Login
+            <i class="fa-solid fa-chevron-down"></i>
+        </button>
+
+        <div id="dropdownMenu" class="dropdown-menu">
+            <a href="/admin/login">
+                <i class="fa-solid fa-user-shield"></i>
+                Admin Login
+            </a>
+
+            <a href="/employee/login">
+                <i class="fa-solid fa-user-tie"></i>
+                Employee Login
+            </a>
+        </div>
+
+    </div>
+</div>
+
+
+
+</header>
+
+<!-- HERO SECTION -->
+
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<h1>
+Keep Your Pool<br>
+Crystal Clear & Safe
+</h1>
+
+<p>
+Professional Pool Cleaning, Water Treatment,
+Pump & Filter Repair and Complete Pool Maintenance
+Services Across Thane & Mumbai.
+</p>
+<div class="hero-buttons">
+
+    <a href="/track" class="btn btn-outline-primary">
+        Track Booking
+    </a>
+
+    <a href="/booking" class="btn btn-primary">
+        Book Now
+    </a>
+
+</div>
+
+</section>
+
+<!-- SERVICES -->
+
+<section class="services" id="services">
+
+<div class="section-title">
+<h2>Our Services</h2>
+<p>Professional Swimming Pool Solutions</p>
+</div>
+
+<div class="service-container">
+
+<div class="service-card">
+
+<i class="fa-solid fa-water-ladder"></i>
+
+<h3>Pool Cleaning</h3>
+
+<p>
+Deep cleaning, vacuuming,
+tile cleaning and complete pool sanitation.
+</p>
+
+</div>
+
+<div class="service-card">
+
+<i class="fa-solid fa-flask"></i>
+
+<h3>Water Treatment</h3>
+
+<p>
+Water balancing,
+chemical treatment and crystal-clear water solutions.
+</p>
+
+</div>
+
+<div class="service-card">
+
+<i class="fa-solid fa-gears"></i>
+
+<h3>Pump & Filter Repair</h3>
+
+<p>
+Pump installation,
+motor servicing and filter maintenance.
+</p>
+
+</div>
+
+<div class="service-card">
+
+<i class="fa-solid fa-screwdriver-wrench"></i>
+
+<h3>Pool Maintenance</h3>
+
+<p>
+Complete AMC,
+weekly maintenance and routine inspections.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+<div class="about-image">
+
+<img src="{{ url_for('static', filename='img/maintain/10.jpeg') }}" alt="About MJ Pool Services">
+</div>
+
+<div class="about-content">
+
+<h2>About MJ Pool Services</h2>
+
+<h4>
+Trusted Pool Maintenance Experts Since 2008
+</h4>
+
+<p>
+
+Since 2008, MJ Pool Services has been delivering
+professional swimming pool maintenance,
+cleaning, water treatment, pump repair and
+filtration solutions across Thane and Mumbai.
+
+</p>
+
+<p>
+
+Our team consists of experienced managers and
+skilled technicians with 18+ years of hands-on
+experience in the swimming pool industry.
+
+</p>
+
+<p>
+
+From routine cleaning and water balancing
+to pump & filter servicing and complete
+maintenance contracts, we ensure every pool
+remains clean, safe and ready for use.
+
+</p>
+
+<p>
+
+With 60+ pools serviced,
+MJ Pool Services continues to be a trusted choice
+for residential, commercial and hotel swimming pools.
+
+</p>
+
+</div>
+
+</section>
+
+<!-- STATS -->
+
+<section class="stats">
+
+<div class="stat-box">
+
+<h2>18+</h2>
+
+<p>Years Experience</p>
+
+</div>
+
+<div class="stat-box">
+
+<h2>60+</h2>
+
+<p>Pools Serviced</p>
+
+</div>
+
+<div class="stat-box">
+
+<h2>25+</h2>
+
+<p>Maintenance Projects</p>
+
+</div>
+
+<div class="stat-box">
+
+<h2>100%</h2>
+
+<p>Customer Satisfaction</p>
+
+</div>
+
+</section>
+
+<!-- WHY CHOOSE US -->
+
+<section class="why-us">
+
+<div class="section-title">
+
+<h2>Why Choose Us</h2>
+
+<p>Trusted Pool Experts</p>
+
+</div>
+
+<div class="why-container">
+
+<div class="why-card">
+
+<i class="fa-solid fa-user-check"></i>
+
+<h3>Experienced Team</h3>
+
+<p>
+Highly skilled technicians
+with 10+ years experience.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<i class="fa-solid fa-shield-heart"></i>
+
+<h3>Quality Service</h3>
+
+<p>
+Reliable maintenance
+and professional support.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<i class="fa-solid fa-clock"></i>
+
+<h3>Quick Response</h3>
+
+<p>
+Fast service throughout
+Thane & Mumbai.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<i class="fa-solid fa-star"></i>
+
+<h3>Customer Satisfaction</h3>
+
+<p>
+Dedicated service
+with proven results.
+</p>
+
+</div>
+
+</div>
+<!-- POOL CARE TIPS -->
+
+<section class="pool-care" id="pool-care">
+
+<div class="section-title">
+    <h2>Pool Care Tips</h2>
+    <p>Understanding the Basics of    Pool Maintenance</p>
+</div>
+
+<div class="pool-care-content">
+
+    <h3>1. Filtration System</h3>
+    <p>
+        Your pool's filtration system removes dirt, leaves, dust and other
+        particles from the water. Running the filter regularly helps keep
+        the water clean, healthy and crystal clear.
+    </p>
+
+    <h3>2. Water Chemistry</h3>
+    <p>
+        Proper chemical balance is essential for safe swimming.
+        Maintaining correct pH, chlorine and alkalinity levels prevents
+        algae growth, bacteria and cloudy water.
+    </p>
+
+    <h3>3. Regular Cleaning</h3>
+    <p>
+        Routine vacuuming, wall brushing and skimming remove debris
+        before it affects water quality. Regular cleaning extends the
+        life of pool equipment and improves appearance.
+    </p>
+
+    <h3>4. Pump & Filter Maintenance</h3>
+    <p>
+        Regular inspection and servicing of pumps and filters ensures
+        efficient circulation and filtration performance.
+    </p>
+
+    <h3>5. Professional Pool Care</h3>
+    <p>
+        Professional maintenance helps detect issues early, reduces
+        repair costs and keeps your swimming pool safe throughout the year.
+    </p>
+
+</div>
+
+</section>
+
+</section>
+<!-- GALLERY -->
+
+<section class="gallery" id="gallery">
+
+<div class="section-title">
+<h2>Our Gallery</h2>
+<p>Recent Projects & Completed Work</p>
+</div>
+
+<!-- Pool Maintenance -->
+
+<div class="gallery-category">
+
+<h3>Swimming Pools Under Regular Maintenance</h3>
+
+<div class="gallery-grid">
+
+<img src="{{ url_for('static', filename='img/maintain/1.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/maintain/2.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/maintain/3.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/maintain/4.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/maintain/5.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/maintain/6.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/maintain/7.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/maintain/8.jpeg') }}" alt="About MJ Pool Services">
+
+</div>
+
+</div>
+
+<!-- Pump Repair -->
+
+<div class="gallery-category">
+
+<h3>Pump & Filter Solutions</h3>
+
+<div class="gallery-grid">
+
+<img src="{{ url_for('static', filename='img/fillter/1.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/fillter/2.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/fillter/3.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/fillter/4.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/fillter/5.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/fillter/6.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/fillter/7.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/fillter/8.jpeg') }}" alt="About MJ Pool Services">
+
+</div>
+
+</div>
+
+<!-- Cleaning -->
+
+<div class="gallery-category">
+
+<h3>Pool Cleaning & Restoration Work</h3>
+
+<div class="gallery-grid">
+
+<img src="{{ url_for('static', filename='img/cleaning/1.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/cleaning/2.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/cleaning/3.jpeg') }}" alt="About MJ Pool Services">
+<img src="{{ url_for('static', filename='img/cleaning/4.jpeg') }}" alt="About MJ Pool Services">
+
+</div>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+<div class="section-title">
+<h2>Contact Us</h2>
+<p>Get Professional Pool Service Today</p>
+</div>
+
+<div class="contact-container">
+
+<div class="contact-box">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<h3>Location</h3>
+
+<p>
+Thane, Mumbai
+</p>
+
+</div>
+
+<a href="tel:+919833265315" class="contact-box">
+
+<i class="fa-solid fa-phone"></i>
+
+<h3>Call Us</h3>
+
+<p>
+9833265315
+</p>
+
+</a>
+
+<a href="/contact" class="contact-box">
+
+<i class="fa-solid fa-envelope"></i>
+
+<h3>Contact</h3>
+
+<p>
+Send Message
+</p>
+
+</a>
+
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
+
+<footer class="footer">
+
+<div class="footer-content">
+
+<h2>MJ Pool Services</h2>
+
+<p>
+
+Professional Swimming Pool Cleaning,
+Water Treatment, Pump & Filter Repair
+and Maintenance Services.
+
+</p>
+
+<p>
+
+Serving Thane & Mumbai Since 2008
+
+</p>
+
+</div>
+
+<div class="footer-bottom">
+
+<p>
+
+© 2025 MJ Pool Services.
+All Rights Reserved.
+
+</p>
+
+</div>
+
+</footer>
+
+<!-- FLOATING BUTTONS -->
+
+<a href="/booking" class="floating-book">
+<i class="fa-solid fa-calendar-check"></i>
+</a>
+
+<a href="tel:+919833265315" class="floating-call">
+<i class="fa-solid fa-phone"></i>
+</a>
+
+<!-- SCRIPT -->
+
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+
+</body>
+</html>
