@@ -12,6 +12,8 @@ from datetime import datetime
 from models.booking_service import BookingService
 from models.payment import Payment
 
+from sqlalchemy.exc import IntegrityError
+
 admin_bp = Blueprint("admin", __name__)
 
 # =========================
@@ -99,11 +101,22 @@ def delete_customer(id):
 # =========================
 # EMPLOYEES
 # =========================
+# =========================
+# EMPLOYEES
+# =========================
+
 @admin_bp.route("/employees")
 @login_required
 def all_employees():
-    employees = Employee.query.order_by(Employee.id.desc()).all()
-    return render_template("admin/employees.html", employees=employees)
+
+    employees = Employee.query.order_by(
+        Employee.id.desc()
+    ).all()
+
+    return render_template(
+        "admin/employees.html",
+        employees=employees
+    )
 
 
 @admin_bp.route("/employees/add", methods=["GET", "POST"])
@@ -113,37 +126,66 @@ def add_employee():
 
     if request.method == "POST":
 
-        emp = Employee(
-            name=request.form["name"],
-            mobile=request.form["mobile"],
-            email=request.form["email"],
-            address=request.form["address"],
-            role=request.form["role"],
-            password=bcrypt.generate_password_hash(
-                request.form["password"]
+        name = request.form.get("name", "").strip()
+        mobile = request.form.get("mobile", "").strip()
+        email = request.form.get("email", "").strip().lower()
+        address = request.form.get("address", "").strip()
+        role = request.form.get("role", "").strip()
+        password = request.form.get("password", "")
+
+        # Required fields
+        if not all([name, mobile, email, address, role, password]):
+            flash("All fields are required", "danger")
+            return render_template("admin/add_employee.html")
+
+        # Mobile validation
+        if not mobile.isdigit() or len(mobile) != 10:
+            flash("Enter a valid 10-digit mobile number", "danger")
+            return render_template("admin/add_employee.html")
+
+        # Duplicate mobile
+        if Employee.query.filter_by(mobile=mobile).first():
+            flash("This mobile number is already registered", "danger")
+            return render_template("admin/add_employee.html")
+
+        # Duplicate email
+        if Employee.query.filter_by(email=email).first():
+            flash("This email is already registered", "danger")
+            return render_template("admin/add_employee.html")
+
+        try:
+            hashed_password = bcrypt.generate_password_hash(
+                password
             ).decode("utf-8")
-        )
 
-        db.session.add(emp)
-        db.session.commit()
+            emp = Employee(
+                name=name,
+                mobile=mobile,
+                email=email,
+                address=address,
+                role=role,
+                password=hashed_password,
+                status="Active"
+            )
 
-        flash("Employee Added Successfully", "success")
-        return redirect("/admin/employees")
+            db.session.add(emp)
+            db.session.commit()
+
+            flash(
+                f"Employee Added Successfully - {emp.employee_id}",
+                "success"
+            )
+            return redirect("/admin/employees")
+
+        except IntegrityError:
+            db.session.rollback()
+            flash(
+                "Employee could not be added. Mobile or Email already exists.",
+                "danger"
+            )
+            return render_template("admin/add_employee.html")
 
     return render_template("admin/add_employee.html")
-
-
-@admin_bp.route("/employees/delete/<int:id>")
-@login_required
-def delete_employee(id):
-
-    employee = Employee.query.get_or_404(id)
-
-    db.session.delete(employee)
-    db.session.commit()
-
-    flash("Employee Deleted Successfully", "success")
-    return redirect("/admin/employees")
 
 
 # =========================
@@ -155,13 +197,61 @@ def delete_employee(id):
 def assign_employee(id):
 
     booking = Booking.query.get_or_404(id)
-    employees = Employee.query.all()
+
+    # Completed / Cancelled booking पुन्हा assign करू नये
+    if booking.status in ["Completed", "Cancelled"]:
+        flash(
+            "Completed or Cancelled booking cannot be assigned.",
+            "warning"
+        )
+        return redirect("/admin/bookings")
+
+    # फक्त Active employees दाखवायचे
+    employees = Employee.query.filter_by(
+        status="Active"
+    ).order_by(
+        Employee.id.desc()
+    ).all()
 
     if request.method == "POST":
-        booking.assigned_employee = request.form["employee"]
+
+        employee_id = request.form.get("employee", "").strip()
+
+        if not employee_id:
+            flash("Please select an employee.", "danger")
+            return render_template(
+                "admin/assign_employee.html",
+                booking=booking,
+                employees=employees
+            )
+
+        # Selected employee database मध्ये आहे का + Active आहे का
+        employee = Employee.query.filter_by(
+            employee_id=employee_id,
+            status="Active"
+        ).first()
+
+        if not employee:
+            flash(
+                "Selected employee is not available.",
+                "danger"
+            )
+            return render_template(
+                "admin/assign_employee.html",
+                booking=booking,
+                employees=employees
+            )
+
+        # Assignment
+        booking.assigned_employee = employee.employee_id
         booking.status = "Assigned"
 
         db.session.commit()
+
+        flash(
+            f"Booking assigned to {employee.employee_id} successfully.",
+            "success"
+        )
 
         return redirect("/admin/bookings")
 
@@ -170,7 +260,6 @@ def assign_employee(id):
         booking=booking,
         employees=employees
     )
-
 
 # =========================
 # SERVICES
@@ -415,7 +504,6 @@ def messages():
 
 
 
-from datetime import datetime
 from sqlalchemy import func
 
 @admin_bp.route("/reports", methods=["GET", "POST"])

@@ -1,0 +1,16 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+.env
+env.env
+
+instance/
+.vscode/
+
+.git/
+
+create_admin.py
+test_customer.py
+test_employee.py

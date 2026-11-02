@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, session, flash
 from flask_login import login_user, login_required, logout_user
 
 from models.admin import Admin
@@ -17,19 +17,21 @@ auth_bp = Blueprint("auth", __name__)
 @auth_bp.route("/admin/login", methods=["GET", "POST"])
 @csrf.exempt
 def admin_login():
-
     if request.method == "POST":
-
-        username = request.form["username"]
-        password = request.form["password"]
+        username = request.form.get("username")
+        password = request.form.get("password")
 
         admin = Admin.query.filter_by(username=username).first()
 
         if admin and bcrypt.check_password_hash(admin.password, password):
+            # Session madhe role set karne
+            session["_user_role"] = "admin"
             login_user(admin)
+            flash("Logged in successfully!", "success")
             return redirect(url_for("auth.dashboard"))
 
-        return "Invalid Username or Password"
+        flash("Invalid Username or Password", "danger")
+        return render_template("admin/login.html")
 
     return render_template("admin/login.html")
 
@@ -40,19 +42,13 @@ def admin_login():
 @auth_bp.route("/admin/dashboard")
 @login_required
 def dashboard():
-
     total_customers = Customer.query.count()
     total_employees = Employee.query.count()
     total_bookings = Booking.query.count()
 
-    print("Customers:", total_customers)
-    print("Employees:", total_employees)
-    print("Bookings:", total_bookings)
-
     pending_jobs = Booking.query.filter_by(status="Pending").count()
     assigned_jobs = Booking.query.filter_by(status="Assigned").count()
     completed_jobs = Booking.query.filter_by(status="Completed").count()
-    
 
     recent_bookings = Booking.query.order_by(
         Booking.id.desc()
@@ -70,12 +66,13 @@ def dashboard():
     )
 
 
-
 # ==========================
 # Logout
 # ==========================
 @auth_bp.route("/admin/logout")
 @login_required
 def logout():
+    session.pop("_user_role", None)
     logout_user()
+    flash("You have been logged out.", "info")
     return redirect(url_for("auth.admin_login"))

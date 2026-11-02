@@ -1,14 +1,14 @@
 import os
 
 class Config:
-    SECRET_KEY = "smart_pool_secret_2026"
+    SECRET_KEY = os.getenv("SECRET_KEY", "dev-secret-key")
 
-    SQLALCHEMY_DATABASE_URI = "mysql+pymysql://root:root123@localhost/pool_service_db"
+    SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL")
+
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-    UPLOAD_FOLDER = os.path.join("static", "uploads")
     MAX_CONTENT_LENGTH = 5 * 1024 * 1024
 
-
-    RAZORPAY_KEY_ID = os.getenv("RAZORPAY_KEY_ID")
-    RAZORPAY_KEY_SECRET = os.getenv("RAZORPAY_KEY_SECRET")
+    SESSION_COOKIE_HTTPONLY = True
+    SESSION_COOKIE_SAMESITE = "Lax"
+    SESSION_COOKIE_SECURE = os.getenv("VERCEL", "").lower() == "1"
