@@ -1,106 +1,730 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
 <meta charset="UTF-8">
-<title>Employee Dashboard</title>
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Employee Dashboard | MJ Pool Services</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+rel="stylesheet">
+
+<link
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+rel="stylesheet">
+
 
 <style>
+
+/* =========================
+   BODY
+========================= */
+
 body{
-background:#eef7ff;
+
+    margin:0;
+    min-height:100vh;
+
+    font-family:"Segoe UI", Arial, sans-serif;
+
+    background:
+        linear-gradient(
+            rgba(0,53,102,.78),
+            rgba(0,53,102,.78)
+        ),
+        url("{{ url_for('static', filename='img/BG.png') }}");
+
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
+    background-repeat:no-repeat;
+
+    padding:35px 15px;
 }
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.dashboard-container{
+
+    max-width:1200px;
+    margin:auto;
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+.dashboard-header{
+
+    background:rgba(255,255,255,.97);
+
+    border-radius:20px;
+
+    padding:22px 28px;
+
+    margin-bottom:25px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.18);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:20px;
+}
+
+
+.employee-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+}
+
+
+.employee-icon{
+
+    width:55px;
+    height:55px;
+
+    border-radius:15px;
+
+    background:#e8f3ff;
+
+    color:#0066b3;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:23px;
+}
+
+
+.employee-info h2{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    color:#123;
+
+}
+
+
+.employee-id{
+
+    margin:3px 0 0;
+
+    color:#6c757d;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   LOGOUT
+========================= */
+
+.logout-btn{
+
+    border:none;
+
+    background:#dc3545;
+
+    color:white;
+
+    padding:11px 20px;
+
+    border-radius:10px;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+
+.logout-btn:hover{
+
+    background:#bb2d3b;
+
+    color:white;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* =========================
+   JOB CARD
+========================= */
+
+.jobs-card{
+
+    background:rgba(255,255,255,.97);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,.18);
+
+}
+
+
+.jobs-heading{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:20px;
+
+}
+
+
+.jobs-heading i{
+
+    color:#0066b3;
+
+    font-size:22px;
+
+}
+
+
+.jobs-heading h5{
+
+    margin:0;
+
+    font-size:20px;
+
+    font-weight:700;
+
+    color:#123;
+
+}
+
+
+/* =========================
+   TABLE
+========================= */
+
+.table{
+
+    margin-bottom:0;
+
+    vertical-align:middle;
+
+}
+
+
+.table thead th{
+
+    background:#0066b3;
+
+    color:white;
+
+    border:none;
+
+    padding:14px 12px;
+
+    font-size:14px;
+
+    white-space:nowrap;
+
+}
+
+
+.table tbody td{
+
+    padding:15px 12px;
+
+    color:#343a40;
+
+    font-size:14px;
+
+}
+
+
+.table tbody tr{
+
+    transition:.2s;
+
+}
+
+
+.table tbody tr:hover{
+
+    background:#f5faff;
+
+}
+
+
+/* =========================
+   BOOKING ID
+========================= */
+
+.booking-id{
+
+    font-weight:700;
+
+    color:#0066b3;
+
+}
+
+
+/* =========================
+   STATUS
+========================= */
+
+.status-badge{
+
+    padding:7px 12px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+}
+
+
+.assigned-badge{
+
+    background:#dff3ff;
+
+    color:#0066b3;
+
+}
+
+
+.completed-badge{
+
+    background:#dff7e8;
+
+    color:#198754;
+
+}
+
+
+/* =========================
+   COMPLETE BUTTON
+========================= */
+
+.complete-btn{
+
+    border:none;
+
+    background:#198754;
+
+    color:white;
+
+    padding:8px 15px;
+
+    border-radius:8px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+
+.complete-btn:hover{
+
+    background:#157347;
+
+    transform:translateY(-2px);
+
+}
+
+
+.done-text{
+
+    color:#198754;
+
+    font-weight:600;
+
+    font-size:13px;
+
+}
+
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state{
+
+    text-align:center;
+
+    padding:50px 20px;
+
+    color:#6c757d;
+
+}
+
+
+.empty-state i{
+
+    font-size:40px;
+
+    margin-bottom:15px;
+
+    color:#9abbd6;
+
+}
+
+
+.empty-state h6{
+
+    font-weight:600;
+
+    color:#495057;
+
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:768px){
+
+    body{
+
+        padding:20px 10px;
+
+    }
+
+
+    .dashboard-header{
+
+        padding:18px;
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+
+    .employee-info{
+
+        justify-content:center;
+
+    }
+
+
+    .logout-btn{
+
+        text-align:center;
+
+    }
+
+
+    .jobs-card{
+
+        padding:15px;
+
+    }
+
+
+    .jobs-heading{
+
+        margin-bottom:15px;
+
+    }
+
+
+    .table-responsive{
+
+        overflow-x:auto;
+
+    }
+
+}
+
 </style>
 
 </head>
+
+
 <body>
 
-<div class="container mt-5">
 
-<div class="d-flex justify-content-between mb-4">
+<div class="dashboard-container">
 
-<div>
-<h2>Employee Dashboard</h2>
-<p class="text-muted mb-0">{{ emp }}</p>
-</div>
 
-<a href="/employee/logout" class="btn btn-danger">
-Logout
-</a>
+<!-- =========================
+     HEADER
+========================= -->
 
-</div>
+<div class="dashboard-header">
 
-<div class="card p-3 shadow-sm">
 
-<h5 class="mb-3">
-My Assigned Jobs
-</h5>
+    <div class="employee-info">
 
-<table class="table table-bordered">
+        <div class="employee-icon">
 
-<thead class="table-primary">
-<tr>
-<th>Booking ID</th>
-<th>Customer</th>
-<th>Service</th>
-<th>Date</th>
-<th>Status</th>
-<th>Action</th>
-</tr>
-</thead>
+            <i class="fa-solid fa-user-tie"></i>
 
-<tbody>
+        </div>
 
-{% for b in bookings %}
 
-<tr>
+        <div>
 
-<td>{{ b.booking_id }}</td>
+            <h2>Employee Dashboard</h2>
 
-<td>{{ b.customer_name }}</td>
+            <p class="employee-id">
 
-<td>{{ b.service }}</td>
+                Employee ID:
+                <strong>{{ emp }}</strong>
 
-<td>{{ b.preferred_date }}</td>
+            </p>
 
-<td>
-{% if b.status=="Assigned" %}
-<span class="badge bg-info">Assigned</span>
-{% else %}
-<span class="badge bg-success">Completed</span>
-{% endif %}
-</td>
+        </div>
 
-<td>
+    </div>
 
-{% if b.status=="Assigned" %}
 
-<a href="/employee/complete/{{ b.id }}"
-class="btn btn-success btn-sm">
+    <a
+        href="/employee/logout"
+        class="logout-btn">
 
-Complete
+        <i class="fa-solid fa-right-from-bracket me-2"></i>
 
-</a>
+        Logout
 
-{% else %}
+    </a>
 
-Done
-
-{% endif %}
-
-</td>
-
-</tr>
-
-{% endfor %}
-
-</tbody>
-
-</table>
 
 </div>
 
+
+
+<!-- =========================
+     JOBS CARD
+========================= -->
+
+<div class="jobs-card">
+
+
+    <div class="jobs-heading">
+
+        <i class="fa-solid fa-clipboard-list"></i>
+
+        <h5>My Assigned Jobs</h5>
+
+    </div>
+
+
+    <div class="table-responsive">
+
+        <table class="table">
+
+
+            <thead>
+
+                <tr>
+
+                    <th>Booking ID</th>
+
+                    <th>Customer</th>
+
+                    <th>Service</th>
+
+                    <th>Date</th>
+
+                    <th>Status</th>
+
+                    <th>Action</th>
+
+                </tr>
+
+            </thead>
+
+
+            <tbody>
+
+
+            {% if bookings %}
+
+
+                {% for b in bookings %}
+
+                <tr>
+
+
+                    <td>
+
+                        <span class="booking-id">
+
+                            {{ b.booking_id }}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        {{ b.customer_name }}
+
+                    </td>
+
+
+                    <td>
+
+                        {{ b.service }}
+
+                    </td>
+
+
+                    <td>
+
+                        {{ b.preferred_date }}
+
+                    </td>
+
+
+                    <td>
+
+                        {% if b.status == "Assigned" %}
+
+                            <span class="status-badge assigned-badge">
+
+                                <i class="fa-solid fa-clock me-1"></i>
+
+                                Assigned
+
+                            </span>
+
+                        {% else %}
+
+                            <span class="status-badge completed-badge">
+
+                                <i class="fa-solid fa-check me-1"></i>
+
+                                Completed
+
+                            </span>
+
+                        {% endif %}
+
+                    </td>
+
+
+                    <td>
+
+
+                        {% if b.status == "Assigned" %}
+
+                            <form
+                                method="POST"
+                                action="/employee/complete/{{ b.id }}"
+                                style="display:inline;">
+
+                                <button
+                                    type="submit"
+                                    class="complete-btn">
+
+                                    <i class="fa-solid fa-check me-1"></i>
+
+                                    Complete
+
+                                </button>
+
+                            </form>
+
+                        {% else %}
+
+                            <span class="done-text">
+
+                                <i class="fa-solid fa-circle-check me-1"></i>
+
+                                Done
+
+                            </span>
+
+                        {% endif %}
+
+
+                    </td>
+
+
+                </tr>
+
+                {% endfor %}
+
+
+            {% else %}
+
+
+                <tr>
+
+                    <td colspan="6">
+
+                        <div class="empty-state">
+
+                            <i class="fa-solid fa-calendar-xmark"></i>
+
+                            <h6>No Assigned Jobs</h6>
+
+                            <p class="mb-0">
+
+                                You currently have no jobs assigned to you.
+
+                            </p>
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+
+            {% endif %}
+
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
 </div>
+
+
+</div>
+
 
 </body>
+
 </html>
