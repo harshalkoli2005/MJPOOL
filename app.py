@@ -1,7 +1,10 @@
 import os
 from flask import Flask, render_template, session
+from dotenv import load_dotenv
+load_dotenv()
 from config import Config
 from extensions import db, bcrypt, login_manager, csrf
+
 
 # मॉडेल इंपोर्ट्स
 from models.admin import Admin
